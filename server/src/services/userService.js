@@ -1,7 +1,7 @@
-import { userRepository } from '../repositories/userRepository';
-import { generateToken } from '../utils/commons/jwt';
-import { comparePassword } from '../utils/commons/passsordHash';
-import ValidationError from '../utils/Errors/validationError';
+import { userRepository } from '../repositories/userRepository.js';
+import { generateToken } from '../utils/commons/jwt.js';
+import { comparePassword } from '../utils/commons/passsordHash.js';
+import ValidationError from '../utils/Errors/validationError.js';
 
 export const signupUser = async (data) => {
   try {
@@ -9,11 +9,14 @@ export const signupUser = async (data) => {
       email: data.email
     });
     if (isUserAlredyExist) {
-      throw ValidationError('User already exist');
+      throw new ValidationError('User already exist');
     }
-    return await userRepository.create(data);
+    const newUser = await userRepository.create(data);
+    return newUser;
   } catch (error) {
-    throw ValidationError('Validation error from signupService', error);
+    throw new ValidationError(
+      error.message || 'Validation error from signupService'
+    );
   }
 };
 
@@ -43,6 +46,6 @@ export const signinUser = async (data) => {
       _id: user._id
     };
   } catch (error) {
-    throw ValidationError('Validation error from signinService', error);
+    throw new ValidationError('Validation error from signinService', error);
   }
 };

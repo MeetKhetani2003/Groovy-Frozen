@@ -1,12 +1,14 @@
 import mongoose from 'mongoose';
 
-import { hashPassword } from '../utils/passsordHash.js';
+import { hashPassword } from '../utils/commons/passsordHash.js';
 
 const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      required: true,
+      required: function () {
+        return true;
+      },
       unique: true
     },
     email: {
@@ -16,7 +18,15 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true
+      required: function () {
+        return this.signedUpVia === 'email';
+      }
+    },
+    signedUpVia: {
+      type: String,
+      enum: ['email', 'google', 'facebook'],
+      required: true,
+      default: 'email'
     },
     role: {
       type: String,
@@ -30,7 +40,7 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
+  if (!this.isModified('password') || !this.password) return next();
   this.password = await hashPassword(this.password);
   next();
 });
