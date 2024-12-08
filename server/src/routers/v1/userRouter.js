@@ -17,7 +17,7 @@ app.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    res.redirect('/dashboard');
+    res.redirect('http://localhost:5173/');
   }
 );
 
@@ -27,7 +27,7 @@ app.get(
   '/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   (req, res) => {
-    res.send('Hello');
+    res.redirect('http://localhost:5173/');
   }
 );
 

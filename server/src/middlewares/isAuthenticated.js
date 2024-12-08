@@ -7,7 +7,6 @@ export const isAuthenticated = (req, res, next) => {
   if (!token) {
     return next(new ValidationError('No token provided'));
   }
-
   try {
     const response = verifyToken(token);
     req.user = response;

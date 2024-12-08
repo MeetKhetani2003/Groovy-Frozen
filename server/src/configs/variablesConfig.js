@@ -13,11 +13,11 @@ export const VariablesConfig = {
 export const facebook = {
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: 'http://localhost:3000/api/v1/users/facebook/callback'
+  callbackURL: 'http://localhost:5173/facebook/callback'
 };
 
 export const google = {
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/api/v1/users/google/callback'
+  callbackURL: 'http://localhost:5173/google/callback'
 };
