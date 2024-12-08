@@ -20,6 +20,7 @@ const Hero = () => {
               Aliquet augue netus id tempus platea praesent vulputate euismod,
               ullamcorper venenatis malesuada magnis urna primis
             </p>
+
             <Button className="mt-4 bg-primaryBg border border-main shadow-lg hover:bg-main text-main hover:text-white hover:shadow-lg hover:shadow-[#437F57]">
               Order Now
             </Button>
