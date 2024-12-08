@@ -19,7 +19,7 @@ export default {
       },
 
       colors: {
-        main: '#EE7301',
+        main: '#437F57',
         mainSecond: '#6F0DA6',
         mainCommon: '#ffffff',
         primaryBg: '#ffe9de',
