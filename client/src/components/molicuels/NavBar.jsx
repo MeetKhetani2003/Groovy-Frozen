@@ -27,9 +27,9 @@ const NavBar = () => {
         </div>
 
         <div className="flex items-center space-x-8">
-          <InstagramIcon className=" hover:text-main cursor-pointer" />
-          <FacebookIcon className=" hover:text-main cursor-pointer" />
-          <FaWhatsapp className="text-2xl hover:text-main cursor-pointer" />
+          <InstagramIcon className=" hover:text-main cursor-pointer hidden lg:block" />
+          <FacebookIcon className=" hover:text-main cursor-pointer hidden lg:block" />
+          <FaWhatsapp className="text-2xl hover:text-main cursor-pointer hidden lg:block" />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="w-10 h-10 hover:cursor-pointer">
