@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
@@ -19,7 +18,7 @@ export default {
       },
 
       colors: {
-        main: '#EE7301',
+        main: '#437F57',
         mainSecond: '#6F0DA6',
         mainCommon: '#ffffff',
         primaryBg: '#ffe9de',
@@ -66,5 +65,5 @@ export default {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [],
 };
