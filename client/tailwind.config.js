@@ -10,6 +10,7 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
+        serif: ['EB Garamond', 'serif'],
         discoteque: ['DiscotequeSt', 'sans-serif'],
         dmSans: ['DM Sans', 'sans-serif'],
         creteRound: ['Crete Round', 'serif'],
@@ -19,12 +20,19 @@ export default {
       boxShadow: {
         custom: 'rgba(17, 12, 46, 0.15) 0px 48px 100px 0px',
       },
+      dropShadow: {
+        custom:
+          ' #bb00ff 0px 1px 1px 0px inset, #437f57af 0px 50px 100px -20px, #437f57 0px 30px 60px -30px',
+      },
 
       colors: {
         main: '#437F57',
         mainSecond: '#6F0DA6',
         mainCommon: '#ffffff',
         primaryBg: '#e1ffeb',
+        cardBg: '#f5fef8',
+        hoverCardBg: '#eefff4',
+
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

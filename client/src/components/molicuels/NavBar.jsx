@@ -33,12 +33,12 @@ const NavBar = () => {
 
   return (
     <nav
-      className={`fixed w-full z-10 transition-all duration-300 ${
+      className={`fixed w-full z-[100] transition-all duration-300 ${
         isScrolled ? 'bg-primaryBg shadow-md' : 'bg-transparent'
       }`}
     >
       <div className="flex items-center mx-5 lg:mx-16 justify-between p-4">
-        <div className="space-x-8 hidden md:block">
+        <div className="space-x-8 hidden lg:block">
           <LinkAtom title={'Home'} url={'/'} />
           <LinkAtom title={'Menu'} url={'/'} />
           <LinkAtom title={'About us'} url={'/'} />
@@ -60,16 +60,16 @@ const NavBar = () => {
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-white border border-gray-200 p-2">
-              <DropdownMenuItem className="text-gray-800 md:hidden">
+              <DropdownMenuItem className="text-gray-800 lg:hidden">
                 Home
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 md:hidden">
+              <DropdownMenuItem className="text-gray-800 lg:hidden">
                 Menu
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 md:hidden">
+              <DropdownMenuItem className="text-gray-800 lg:hidden">
                 About us
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 md:hidden">
+              <DropdownMenuItem className="text-gray-800 lg:hidden">
                 Contact us
               </DropdownMenuItem>
               <DropdownMenuItem className="text-gray-800">
