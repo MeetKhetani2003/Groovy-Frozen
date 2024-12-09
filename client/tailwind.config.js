@@ -16,12 +16,15 @@ export default {
         montserrat: ['Montserrat', 'sans-serif'],
         quicksand: ['Quicksand', 'sans-serif'],
       },
+      boxShadow: {
+        custom: 'rgba(17, 12, 46, 0.15) 0px 48px 100px 0px',
+      },
 
       colors: {
         main: '#437F57',
         mainSecond: '#6F0DA6',
         mainCommon: '#ffffff',
-        primaryBg: '#ffe9de',
+        primaryBg: '#e1ffeb',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

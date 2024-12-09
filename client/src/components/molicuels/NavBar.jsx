@@ -1,4 +1,5 @@
 import { FacebookIcon, InstagramIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 
 import Logo from '@/components/atoms/Logo';
@@ -13,10 +14,31 @@ import LinkAtom from '../atoms/LinkAtom';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 const NavBar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="fixed w-full z-10">
+    <nav
+      className={`fixed w-full z-10 transition-all duration-300 ${
+        isScrolled ? 'bg-primaryBg shadow-md' : 'bg-transparent'
+      }`}
+    >
       <div className="flex items-center mx-5 lg:mx-16 justify-between p-4">
-        <div className=" space-x-8 hidden md:block">
+        <div className="space-x-8 hidden md:block">
           <LinkAtom title={'Home'} url={'/'} />
           <LinkAtom title={'Menu'} url={'/'} />
           <LinkAtom title={'About us'} url={'/'} />
@@ -27,8 +49,8 @@ const NavBar = () => {
         </div>
 
         <div className="flex items-center space-x-8">
-          <InstagramIcon className=" hover:text-main cursor-pointer hidden lg:block" />
-          <FacebookIcon className=" hover:text-main cursor-pointer hidden lg:block" />
+          <InstagramIcon className="hover:text-main cursor-pointer hidden lg:block" />
+          <FacebookIcon className="hover:text-main cursor-pointer hidden lg:block" />
           <FaWhatsapp className="text-2xl hover:text-main cursor-pointer hidden lg:block" />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -50,7 +72,7 @@ const NavBar = () => {
               <DropdownMenuItem className="text-gray-800 md:hidden">
                 Contact us
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 ">
+              <DropdownMenuItem className="text-gray-800">
                 Profile
               </DropdownMenuItem>
               <DropdownMenuItem className="text-red-500">
