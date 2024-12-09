@@ -3,7 +3,7 @@ import { Separator } from '../ui/separator';
 
 const MenuProductCard = ({ img, title, heading, price }) => {
   return (
-    <div className="relative bg-cardBg hover:bg-hoverCardBg min-h-72 flex flex-col items-center px-2 py-6 rounded-lg shadow-md peer">
+    <div className="relative bg-cardBg hover:bg-hoverCardBg min-h-72 flex flex-col items-center px-2 py-6 rounded-lg shadow-md">
       {/* Image Section */}
       <div className="relative w-full rounded-lg">
         <img
