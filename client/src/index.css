@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap');
 @tailwind base;
@@ -22,10 +23,14 @@
 .primaryColor {
   color: #8400ff;
 }
-
-.secondaryColor {
-  color: #e37521;
+.shadow-custom {
+  box-shadow: #bb00ff 0px 1px 1px 0px inset, #437f57af 0px 50px 100px -20px,
+    #437f57 0px 30px 60px -30px;
 }
+.secondaryColor {
+  color: #e1ffeb;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
