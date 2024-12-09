@@ -3,7 +3,7 @@ import { assets } from '@/utils/AssetImport';
 
 const Menu = () => {
   return (
-    <div className="max-w-[1400px] mx-auto mt-20">
+    <div className="mx-8 lg:max-w-[1400px] lg:mx-auto mt-20">
       <h1 className="text-5xl uppercase font-semibold font-serif text-center ">
         Our Menu
       </h1>

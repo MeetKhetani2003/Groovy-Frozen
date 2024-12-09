@@ -3,7 +3,7 @@ import { assets } from '@/utils/AssetImport';
 
 const OfferContainer = () => {
   return (
-    <div className="max-w-7xl mt-12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-9 md:gap-4">
+    <div className=" lg:max-w-7xl mt-12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-9 md:gap-4">
       <OfferCard
         className={'bg-[#D2EAEB]'}
         img={assets.cocktail}

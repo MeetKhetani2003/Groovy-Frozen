@@ -12,9 +12,13 @@ const Hero = () => {
           </div>
           <div className="lg:w-2/4 lg:ml-12 lg:mb-28">
             <p className="font-montserrat">Welcome to</p>
-            <span className="leading-none lg:flex-none flex justify-center items-center gap-2">
-              <p className=" text-8xl lg:text-[120px] font-serif">Groovy </p>
-              <p className=" text-8xl lg:text-[120px] font-serif">Cafe </p>
+            <span className="leading-none lg:flex-none flex justify-center">
+              <p className=" text-6xl md:text-8xl lg:text-[120px] font-serif">
+                Groovy{' '}
+              </p>
+              <p className=" text-6xl md:text-8xl lg:text-[120px] font-serif">
+                Cafe{' '}
+              </p>
             </span>
             <p className="text-lg font-montserrat mt-4 text-gray-800">
               Aliquet augue netus id tempus platea praesent vulputate euismod,
