@@ -25,7 +25,7 @@ const Hero = () => {
               ullamcorper venenatis malesuada magnis urna primis
             </p>
 
-            <Button className="mt-4 bg-primaryBg border border-main shadow-lg hover:bg-main text-main hover:text-white hover:shadow-lg hover:shadow-[#437F57]">
+            <Button className="mt-4 bg-primaryBg border border-main shadow-lg hover:bg-main text-main hover:text-white hover:shadow-lg hover:shadow-primaryBg">
               Order Now
             </Button>
           </div>

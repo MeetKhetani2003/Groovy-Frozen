@@ -22,17 +22,16 @@ export default {
       },
       dropShadow: {
         custom:
-          ' #bb00ff 0px 1px 1px 0px inset, #437f57af 0px 50px 100px -20px, #437f57 0px 30px 60px -30px',
+          ' #bb00ff 0px 1px 1px 0px inset, #EE7301af 0px 50px 100px -20px, #EE7301 0px 30px 60px -30px',
       },
 
       colors: {
-        main: '#437F57',
+        main: '#EE7301',
         mainSecond: '#6F0DA6',
         mainCommon: '#ffffff',
-        primaryBg: '#e1ffeb',
-        cardBg: '#f5fef8',
-        hoverCardBg: '#eefff4',
-
+        primaryBg: '#FFE9DE',
+        cardBg: '#fcefe8',
+        hoverCardBg: '#fae8df',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

@@ -24,7 +24,7 @@ const OfferCard = ({ img, title, heading, className, object }) => {
         <h2 className="text-2xl md:text-3xl font-semibold whitespace-nowrap font-montserrat mt-2">
           {heading}
         </h2>
-        <Button className="mt-4  w-24 md:w-28 bg-main text-white font-medium rounded-full shadow-md hover:bg-green-700 hover:shadow-lg transition-all duration-300">
+        <Button className="mt-4  w-24 md:w-28 bg-main text-white font-medium rounded-full shadow-md hover:bg-primaryBg hover:text-main hover:shadow-lg transition-all duration-300">
           Order Now
         </Button>
       </div>
