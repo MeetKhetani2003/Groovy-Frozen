@@ -1,6 +1,12 @@
 import { StatusCodes } from 'http-status-codes';
 
-import { signinUser, signupUser } from '../services/userService.js';
+import {
+  forgotPassword,
+  resetPassword,
+  signinUser,
+  signupUser,
+  verifyOtp
+} from '../services/userService.js';
 import {
   errorResponse,
   successResponse
@@ -17,7 +23,6 @@ export const signupController = async (req, res) => {
       data
     );
   } catch (error) {
-    // Check if the error is an instance of ValidationError
     if (error instanceof ValidationError) {
       console.log('Controller', error.message);
 
@@ -48,6 +53,56 @@ export const signinController = async (req, res) => {
       500,
       'Internal Server Error',
       'An unexpected error occurred'
+    );
+  }
+};
+
+export const forgotPasswordController = async (req, res) => {
+  try {
+    await forgotPassword(req.body);
+    return successResponse(res, StatusCodes.OK, 'OTP sent to your email');
+  } catch (error) {
+    return errorResponse(
+      res,
+      error,
+      500,
+      'Internal Server Error',
+      'An unexpected error occurred'
+    );
+  }
+};
+
+export async function verifyOtpController(req, res) {
+  try {
+    const result = await verifyOtp(req.body);
+    console.log(result);
+
+    return res
+      .status(200)
+      .json({ message: 'OTP verified successfully', data: result });
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+export const resetPasswordController = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+    const result = await resetPassword({ token, newPassword });
+    return res.status(200).json({
+      status: 'success',
+      message: result.message
+    });
+  } catch (error) {
+    return errorResponse(
+      res,
+      error,
+      400,
+      'Error resetting password',
+      error.message
     );
   }
 };
