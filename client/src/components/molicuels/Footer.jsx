@@ -54,7 +54,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center py-4 bg-green-950">
+      <div className="flex justify-center py-4 bg-orange-950">
         <p className="text-white text-center font-montserrat">
           © 2023 Groovy Cafe. All rights reserved.
         </p>

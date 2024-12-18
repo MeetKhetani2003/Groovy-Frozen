@@ -1,11 +1,9 @@
-import { StatusCodes } from 'http-status-codes';
+// import { StatusCodes } from 'http-status-codes';
 class ValidationError extends Error {
-  constructor(message, details = []) {
+  constructor(message, details = 400) {
     super(message);
     this.name = this.constructor.name;
-    this.message = message || 'Validation failed';
-    this.details = details;
-    this.statusCode = StatusCodes.BAD_REQUEST;
+    this.details = details; // This will hold the status code (default 400)
   }
 }
 
