@@ -9,7 +9,10 @@ export const VariablesConfig = {
   MONGODB_URL_DEV: process.env.MONGO_DB_DEV_URI,
   JWT_SECRET: process.env.JWT_SECRET,
   MAIL_ID: process.env.MAIL_ID,
-  MAIL_PASSWORD: process.env.MAIL_PASSWORD
+  MAIL_PASSWORD: process.env.MAIL_PASSWORD,
+  CLOUD_NAME: process.env.CLOUD_NAME,
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET
 };
 
 export const facebook = {

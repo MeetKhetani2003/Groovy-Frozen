@@ -8,8 +8,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: function () {
         return true;
-      },
-      unique: true
+      }
     },
     email: {
       type: String,
@@ -22,6 +21,11 @@ const userSchema = new mongoose.Schema(
         return this.signedUpVia === 'email';
       }
     },
+    cart: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Cart',
+      required: true
+    },
     signedUpVia: {
       type: String,
       enum: ['email', 'google', 'facebook'],
@@ -32,6 +36,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ['admin', 'user'],
       default: 'user'
+    },
+    avatar: {
+      type: String,
+      required: true
+    },
+    address: {
+      type: String,
+      default: ''
+    },
+    mobileNumber: {
+      type: String,
+      default: ''
     }
   },
   {
@@ -42,6 +58,7 @@ const userSchema = new mongoose.Schema(
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password') || !this.password) return next();
   this.password = await hashPassword(this.password);
+
   next();
 });
 

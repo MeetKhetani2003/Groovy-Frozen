@@ -2,6 +2,7 @@
 
 import { redisClient } from '../configs/redisConfig.js';
 import { sendOtpMail } from '../middlewares/mailer.js';
+import User from '../models/User.js';
 import { userRepository } from '../repositories/userRepository.js';
 import {
   generateResetPasswordToken,
@@ -14,54 +15,53 @@ import {
   hashPassword
 } from '../utils/commons/passsordHash.js';
 import ValidationError from '../utils/Errors/validationError.js';
-
+import { createCart, updateCartUser } from './cartService.js';
 export const signupUser = async (data) => {
   try {
-    const isUserAlredyExist = await userRepository.getOne({
+    const isUserAlreadyExist = await userRepository.getOne({
       email: data.email
     });
-    if (isUserAlredyExist) {
-      throw new ValidationError('User already exist');
+    data.avatar = `https://robohash.org/${data.username}`;
+    if (isUserAlreadyExist) {
+      throw new ValidationError('User already exists');
     }
+    const newCart = await createCart();
+    data.cart = newCart._id;
     const newUser = await userRepository.create(data);
+    await updateCartUser(newCart._id, { userId: newUser._id });
+    await newUser.save();
     return newUser;
   } catch (error) {
-    throw new ValidationError(
-      error.message || 'Validation error from signupService'
-    );
+    console.log(error);
+
+    throw new ValidationError(error.message || 'Error during user signup');
   }
 };
 
 export const signinUser = async (data) => {
   try {
-    const user = await userRepository.getOne({
-      email: data.email
-    });
+    const user = await userRepository.getOne({ email: data.email });
     if (!user) {
-      throw ValidationError('User does not exist');
+      throw new ValidationError('User does not exist');
     }
+
     const isCorrectPassword = await comparePassword(
       data.password,
       user.password
     );
     if (!isCorrectPassword) {
-      throw ValidationError('Invalid password');
+      throw new ValidationError('Invalid password');
     }
-    const tokenData = {
-      user: user
-    };
+
+    const tokenData = { user: user };
     const token = await generateToken(tokenData);
 
-    return {
-      token: token,
-      username: user.username,
-      _id: user._id
-    };
+    // Return the token and user data
+    return { token, user };
   } catch (error) {
     throw new ValidationError('Validation error from signinService', error);
   }
 };
-
 export const forgotPassword = async (data) => {
   try {
     const { email } = data;
@@ -138,5 +138,31 @@ export const resetPassword = async ({ token, newPassword }) => {
     return { message: 'Password reset successfully.' };
   } catch (error) {
     throw new Error('Error resetting password: ' + error.message);
+  }
+};
+
+export const getAllUsersService = async () => {
+  try {
+    const users = await userRepository.getAll();
+    return users;
+  } catch (error) {
+    throw new ValidationError(error.message);
+  }
+};
+
+export const updateUserService = async (id, data) => {
+  try {
+    console.log(id, data);
+
+    const user = await User.findByIdAndUpdate(id, data, { new: true });
+    if (!user) {
+      throw new ValidationError('User not found');
+    }
+    await user.save();
+    return user;
+  } catch (error) {
+    console.log(error);
+
+    throw new ValidationError(error.message);
   }
 };

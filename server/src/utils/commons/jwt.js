@@ -20,7 +20,7 @@ export const generateToken = (data) => {
 
   // Generate the token
   const token = jwt.sign(plainData, VariablesConfig.JWT_SECRET, {
-    expiresIn: '1h'
+    expiresIn: '1d'
   });
   return token;
 };

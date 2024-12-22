@@ -30,15 +30,16 @@ export const successResponse = (
  */
 export const errorResponse = (
   res,
-  statusCode = StatusCodes.BAD_REQUEST,
-  error = 'Error',
-  message = 'An error occurred',
-  details = null
+  error,
+  statusCode = 500,
+  message = 'Something went wrong',
+  detailedMessage = ''
 ) => {
+  console.error(error); // Log the error in your server console
+
   return res.status(statusCode).json({
     success: false,
-    error,
     message,
-    details
+    error: detailedMessage || error.message || error
   });
 };

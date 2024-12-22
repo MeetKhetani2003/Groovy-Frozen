@@ -1,5 +1,5 @@
-import { verifyToken } from '../utils/commons/jwt';
-import ValidationError from '../utils/Errors/validationError';
+import { verifyToken } from '../utils/commons/jwt.js';
+import ValidationError from '../utils/Errors/validationError.js';
 
 export const isAuthenticated = (req, res, next) => {
   const token = req.headers['x-access-token'];
@@ -9,7 +9,9 @@ export const isAuthenticated = (req, res, next) => {
   }
   try {
     const response = verifyToken(token);
+
     req.user = response;
+
     next();
   } catch (error) {
     return next(new ValidationError('Invalid token', error));

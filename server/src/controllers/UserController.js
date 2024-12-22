@@ -2,9 +2,11 @@ import { StatusCodes } from 'http-status-codes';
 
 import {
   forgotPassword,
+  getAllUsersService,
   resetPassword,
   signinUser,
   signupUser,
+  updateUserService,
   verifyOtp
 } from '../services/userService.js';
 import {
@@ -42,10 +44,15 @@ export const signupController = async (req, res) => {
   }
 };
 
-export const signinController = async (req, res) => {
+export const getAllUsersController = async (req, res) => {
   try {
-    await signinUser(req.body);
-    return successResponse(res, StatusCodes.OK, 'User signed in successfully');
+    const users = await getAllUsersService();
+    return successResponse(
+      res,
+      StatusCodes.OK,
+      'Users fetched successfully',
+      users
+    );
   } catch (error) {
     return errorResponse(
       res,
@@ -56,7 +63,27 @@ export const signinController = async (req, res) => {
     );
   }
 };
+export const signinController = async (req, res) => {
+  try {
+    // Capture the result of signinUser, which includes token and user
+    const { token, user } = await signinUser(req.body);
 
+    // Pass the token and user to the successResponse
+    return successResponse(res, StatusCodes.OK, 'User signed in successfully', {
+      token,
+      user
+    });
+  } catch (error) {
+    // In case of an error, return the error response
+    return errorResponse(
+      res,
+      error,
+      StatusCodes.INTERNAL_SERVER_ERROR,
+      'Internal Server Error',
+      'An unexpected error occurred'
+    );
+  }
+};
 export const forgotPasswordController = async (req, res) => {
   try {
     await forgotPassword(req.body);
@@ -103,6 +130,29 @@ export const resetPasswordController = async (req, res) => {
       400,
       'Error resetting password',
       error.message
+    );
+  }
+};
+
+export const updateUserController = async (req, res) => {
+  try {
+    const id = req.user.user._id || req.user._id;
+    const updatedUser = await updateUserService(id, req.body);
+    console.log(id, req.body);
+
+    return successResponse(
+      res,
+      StatusCodes.OK,
+      'User updated successfully',
+      updatedUser
+    );
+  } catch (error) {
+    return errorResponse(
+      res,
+      error,
+      500,
+      'Internal Server Error',
+      'An unexpected error occurred'
     );
   }
 };

@@ -2,6 +2,7 @@ export const curdRepository = (model) => ({
   create: async (data) => {
     return await model.create(data);
   },
+
   getById: async (id) => {
     return await model.findById(id);
   },
@@ -15,6 +16,8 @@ export const curdRepository = (model) => ({
     return await model.findByIdAndDelete(id), { new: true };
   },
   updateById: async (id, data) => {
-    return await model.findByIdAndUpdate(id, data), { new: true };
+    const updated = await model.findByIdAndUpdate((id, data), { new: true });
+    await model.save();
+    return updated;
   }
 });
