@@ -28,7 +28,7 @@
     #437f57 0px 30px 60px -30px;
 }
 .secondaryColor {
-  color: #f5fef8;
+  color: #fae8df;
 }
 
 @layer base {
@@ -64,6 +64,10 @@
     --destructive: 0 84.2% 60.2%;
 
     --destructive-foreground: 210 40% 98%;
+
+    --success: 120 70% 40%;
+
+    --success-foreground: 120 70% 90%;
 
     --border: 214.3 31.8% 91.4%;
 

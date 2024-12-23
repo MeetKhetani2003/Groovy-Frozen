@@ -17,15 +17,16 @@ const Hero = () => {
                 Groovy{' '}
               </p>
               <p className=" text-6xl md:text-8xl lg:text-[120px] font-serif">
-                Cafe{' '}
+                Foods{' '}
               </p>
             </span>
             <p className="text-lg font-montserrat mt-4 text-gray-800">
-              Aliquet augue netus id tempus platea praesent vulputate euismod,
-              ullamcorper venenatis malesuada magnis urna primis
+              serving delicious ready-to-eat and frozen meals for over 20 years.
+              Experience the perfect blend of convenience, taste, and quality in
+              every bite!
             </p>
 
-            <Button className="mt-4 bg-primaryBg border border-main shadow-lg hover:bg-main text-main hover:text-white hover:shadow-lg hover:shadow-primaryBg">
+            <Button className="mt-4 bg-primaryBg border border-main shadow-lg hover:bg-main text-main hover:text-white lg:px-6 lg:py-4 hover:shadow-lg hover:shadow-primaryBg">
               Order Now
             </Button>
           </div>

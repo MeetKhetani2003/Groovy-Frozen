@@ -5,7 +5,7 @@ import NavBar from '@/components/molicuels/NavBar';
 
 const Layout = () => {
   return (
-    <div className=" min-h-screen">
+    <div className="min-h-screen">
       <NavBar />
       <Outlet />
       <Footer />
