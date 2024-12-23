@@ -161,7 +161,7 @@ const Success = () => {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div className="pt-16">
+    <div className="pt-16 min-h-screen">
       <h2>Invoice Preview</h2>
       {/* PDF Preview */}
       <PDFViewer style={{ width: '100%', height: '80vh', border: 'none' }}>

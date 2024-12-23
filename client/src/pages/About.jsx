@@ -7,8 +7,28 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const AboutUs = () => {
+  const [teamMembers, setTeamMembers] = useState([]);
+
+  // Fetch team members from Random User API
+  useEffect(() => {
+    const fetchTeamMembers = async () => {
+      try {
+        const response = await axios.get(
+          'https://randomuser.me/api/?results=4'
+        );
+        setTeamMembers(response.data.results);
+      } catch (error) {
+        console.error('Error fetching team members:', error);
+      }
+    };
+
+    fetchTeamMembers();
+  }, []);
+
   return (
     <Container maxWidth="lg" className="pt-20">
       {/* Hero Section */}
@@ -16,7 +36,6 @@ const AboutUs = () => {
         sx={{
           textAlign: 'center',
           py: 5,
-          backgroundColor: '#f4f4f4',
           borderRadius: 3,
         }}
       >
@@ -35,7 +54,7 @@ const AboutUs = () => {
             <Avatar
               sx={{ bgcolor: '#EE7301', width: 56, height: 56, m: 'auto' }}
             >
-              {/* <MissionIcon /> */}
+              {/* Mission Icon */}
             </Avatar>
             <CardContent>
               <Typography variant="h5" gutterBottom>
@@ -53,7 +72,7 @@ const AboutUs = () => {
             <Avatar
               sx={{ bgcolor: '#EE7301', width: 56, height: 56, m: 'auto' }}
             >
-              {/* <VisionIcon /> */}
+              {/* Vision Icon */}
             </Avatar>
             <CardContent>
               <Typography variant="h5" gutterBottom>
@@ -71,7 +90,7 @@ const AboutUs = () => {
             <Avatar
               sx={{ bgcolor: '#EE7301', width: 56, height: 56, m: 'auto' }}
             >
-              {/* <TeamworkIcon /> */}
+              {/* Teamwork Icon */}
             </Avatar>
             <CardContent>
               <Typography variant="h5" gutterBottom>
@@ -95,21 +114,19 @@ const AboutUs = () => {
           Our dedicated team works tirelessly to bring our vision to life.
         </Typography>
         <Grid container spacing={4}>
-          {[1, 2, 3, 4].map((teamMember, index) => (
+          {teamMembers.map((member, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
               <Card sx={{ textAlign: 'center', boxShadow: 3 }}>
                 <Avatar
-                  alt={`Team Member ${index + 1}`}
-                  src={`https://via.placeholder.com/150?text=Team+${index + 1}`}
+                  alt={`${member.name.first} ${member.name.last}`}
+                  src={member.picture.large}
                   sx={{ width: 100, height: 100, m: 'auto', mt: 2 }}
                 />
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
-                    Team Member {index + 1}
+                    {`${member.name.first} ${member.name.last}`}
                   </Typography>
-                  <Typography color="text.secondary">
-                    Role {index + 1}
-                  </Typography>
+                  <Typography color="text.secondary">{member.email}</Typography>
                 </CardContent>
               </Card>
             </Grid>

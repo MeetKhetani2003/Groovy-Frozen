@@ -10,7 +10,7 @@ const MenuProductCard = ({ img, title, heading, price, to, onAddToCart }) => {
       <div className="relative w-full rounded-lg">
         <Link to={to}>
           <img
-            className="w-full absolute -top-24 object-contain transition-transform duration-300 transform hover:scale-95 drop-shadow-md hover:drop-shadow-2xl"
+            className="w-full absolute -top-24 max-h-60 object-contain transition-transform duration-300 transform hover:scale-95 drop-shadow-md hover:drop-shadow-2xl"
             src={img}
             alt="food1"
           />
