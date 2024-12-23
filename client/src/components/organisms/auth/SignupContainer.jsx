@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/toaster';
 import { useSignup } from '@/hooks/signpHooks'; // Correct import
 
 import SignupCard from './SignupCard';
@@ -16,6 +17,7 @@ const SignupContainer = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <SignupCard submitFunc={handleSignup} />
+      <Toaster />
     </div>
   );
 };
