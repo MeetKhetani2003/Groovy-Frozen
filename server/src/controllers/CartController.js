@@ -7,7 +7,7 @@ import {
 export const addProductToCartController = async (req, res) => {
   try {
     console.log(req.user);
-    const userId = req.user._id;
+    const userId = req.user._id || req.user.user._id;
 
     if (!userId) {
       return res.status(400).json({
