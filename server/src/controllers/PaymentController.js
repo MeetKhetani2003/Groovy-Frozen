@@ -50,7 +50,7 @@ export const paymentVerification = async (req, res) => {
     if (isAuthenticated) {
       // If verification is successful, redirect to the success page
       res.redirect(
-        `http://localhost:5173/success?reference=${razorpay_payment_id}`
+        `https://groovy-frozen-self.vercel.app/success?reference=${razorpay_payment_id}`
       );
     } else {
       res

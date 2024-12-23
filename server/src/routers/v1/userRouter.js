@@ -26,7 +26,7 @@ app.get(
   (req, res) => {
     const token = generateToken(req.user);
     res.redirect(
-      `http://localhost:5173/facebook/callback?token=${token}&user=${req.user}`
+      `https://groovy-frozen-self.vercel.app/google/callback?token=${token}&user=${req.user}`
     );
   }
 );
@@ -39,7 +39,7 @@ app.get(
   (req, res) => {
     const token = generateToken(req.user);
     res.redirect(
-      `http://localhost:5173/facebook/callback?token=${token}&user=${req.user}`
+      `https://groovy-frozen-self.vercel.app/facebook/callback?token=${token}&user=${req.user}`
     );
   }
 );
