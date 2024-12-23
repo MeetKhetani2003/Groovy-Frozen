@@ -23,6 +23,8 @@ export const updateCartUser = async (cartId, data) => {
     throw new ValidationError(error.message);
   }
 };
+
+
 export const addProductToCartService = async (
   userId,
   productId,

@@ -11,9 +11,11 @@ import SignupContainer from './components/organisms/auth/SignupContainer';
 import Layout from './components/organisms/layout/Layout';
 import MenuDetail from './components/organisms/Menu/MenuDetail';
 import About from './pages/About';
+import AboutUs from './pages/About';
 import Admin from './pages/Admin';
 import CheckoutPage from './pages/CheckoutPAge';
 import Contact from './pages/Contact';
+import ContactUs from './pages/Contact';
 import Home from './pages/Home';
 import Menu from './pages/MenuPage';
 import Success from './pages/Success';
@@ -53,6 +55,8 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/success" element={<Success />} />
           <Route path="/menu" element={<Menu />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route
             index
             element={

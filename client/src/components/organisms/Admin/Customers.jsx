@@ -22,15 +22,16 @@ const Customers = () => {
   const [orderBy, setOrderBy] = useState('username');
   const [orderDirection, setOrderDirection] = useState('asc');
 
+  // Fetch data once
   useEffect(() => {
     getAllUserData();
-  }, []);
+  }, [getAllUserData]);
 
+  // Enrich user data with purchasedProductsCount
   useEffect(() => {
     if (Array.isArray(userData)) {
-      // Add a new property 'purchasedProductsCount' to each user
       const enrichedData = userData.map((user) => {
-        let purchasedProductsCount = user.cart.purchasedHistory.reduce(
+        const purchasedProductsCount = user.cart?.purchasedHistory.reduce(
           (total, history) =>
             total +
             history.order.reduce(
@@ -39,19 +40,18 @@ const Customers = () => {
             ),
           0
         );
-        purchasedProductsCount = purchasedProductsCount - 1;
 
-        return { ...user, purchasedProductsCount };
+        return { ...user, purchasedProductsCount: purchasedProductsCount || 0 };
       });
-      setFilteredData(enrichedData);
-    } else {
-      throw new Error('userData is not an array');
+      setFilteredData(enrichedData); // Ensure enriched data doesn't trigger unintended updates
     }
   }, [userData]);
 
+  // Handle search
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
+
     const filtered = userData.filter(
       (user) =>
         user.username.toLowerCase().includes(query) ||
@@ -59,21 +59,22 @@ const Customers = () => {
         user.email.toLowerCase().includes(query) ||
         user.address.toLowerCase().includes(query)
     );
+
     setFilteredData(filtered);
   };
 
+  // Handle sorting
   const handleSort = (column) => {
     const isAsc = orderBy === column && orderDirection === 'asc';
     setOrderDirection(isAsc ? 'desc' : 'asc');
     setOrderBy(column);
 
     const sortedData = [...filteredData].sort((a, b) => {
-      if (isAsc) {
-        return a[column] > b[column] ? 1 : -1;
-      } else {
-        return a[column] < b[column] ? 1 : -1;
-      }
+      if (a[column] < b[column]) return isAsc ? -1 : 1;
+      if (a[column] > b[column]) return isAsc ? 1 : -1;
+      return 0;
     });
+
     setFilteredData(sortedData);
   };
 

@@ -10,8 +10,6 @@ export const createProductService = async (data) => {
         'Product already exists. Please update its stock instead.'
       );
     }
-    console.log(data);
-
     const product = await productRepository.create(data);
     return product;
   } catch (error) {
@@ -28,7 +26,6 @@ export const getAllProductsService = async (page, limit, filters) => {
     if (!defaultFilters.sortByPrice) {
       defaultFilters.sortByPrice = 1;
     }
-
     const products = await productRepository.getAllProductsPaginated(
       page,
       limit,
@@ -151,24 +148,18 @@ export const deleteProductService = async (id) => {
       await cloudinaryInstance.uploader.destroy(thumbnailPublicId);
     }
 
-    // Delete detailed images from Cloudinary
     if (product.detailedImages && product.detailedImages.length > 0) {
       await Promise.all(
         product.detailedImages.map(async (imgUrl) => {
-          console.log('Deleting image:', imgUrl); // Log the image URL
           const publicId = extractPublicId(imgUrl);
-          console.log('Extracted public_id:', publicId); // Log the extracted public_id
           try {
-            const response =
-              await cloudinaryInstance.uploader.destroy(publicId);
-            console.log('Delete response:', response); // Log the delete response
+            await cloudinaryInstance.uploader.destroy(publicId);
           } catch (error) {
-            console.error('Error deleting image:', error.message);
+            throw new ValidationError(error.message);
           }
         })
       );
     }
-
     await productRepository.deleteById(id);
     return { success: true, message: 'Product deleted successfully' };
   } catch (error) {

@@ -32,8 +32,6 @@ export const signupUser = async (data) => {
     await newUser.save();
     return newUser;
   } catch (error) {
-    console.log(error);
-
     throw new ValidationError(error.message || 'Error during user signup');
   }
 };
@@ -44,7 +42,6 @@ export const signinUser = async (data) => {
     if (!user) {
       throw new ValidationError('User does not exist');
     }
-
     const isCorrectPassword = await comparePassword(
       data.password,
       user.password
@@ -56,7 +53,6 @@ export const signinUser = async (data) => {
     const tokenData = { user: user };
     const token = await generateToken(tokenData);
 
-    // Return the token and user data
     return { token, user };
   } catch (error) {
     throw new ValidationError('Validation error from signinService', error);
@@ -68,12 +64,10 @@ export const forgotPassword = async (data) => {
     const otp = generateOtp();
     const expiry = Date.now() + 10 * 60 * 1000;
     await redisClient.set(email, JSON.stringify({ otp, expiry }));
-    console.log('OTP set in Redis:', await redisClient.get(email));
 
     await redisClient.expire(email, 600);
 
     await sendOtpMail({ email, otp });
-
     return { message: 'OTP sent to your email.' };
   } catch (error) {
     throw new ValidationError('Error sending OTP for forgot password', error);
@@ -82,8 +76,6 @@ export const forgotPassword = async (data) => {
 
 export const verifyOtp = async ({ otp }) => {
   try {
-    console.log('OTP:', otp);
-
     const keys = await redisClient.keys('*');
 
     let email = null;
