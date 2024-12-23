@@ -87,40 +87,46 @@ export const cartRepository = {
         throw new Error('Cart not found');
       }
 
+      const updatedProducts = new Set();
+
       for (const item of data.products) {
         const cartProductIndex = cart.products.findIndex(
           (product) => product.productId.toString() === item.productId
         );
+
         console.log('cartProductIndex', cartProductIndex);
         console.log('item', item);
-        const updateProductStock = async (productId, quantity) => {
-          try {
-            const product = await Product.findById(productId);
-            if (!product) {
-              throw new Error('Product not found');
+
+        if (!updatedProducts.has(item.productId)) {
+          updatedProducts.add(item.productId);
+          const updateProductStock = async (productId, quantity) => {
+            try {
+              const product = await Product.findById(productId);
+              if (!product) {
+                throw new Error('Product not found');
+              }
+              const decrementAmount = quantity * product.packetQuantity;
+
+              const updatedProduct = await Product.findByIdAndUpdate(
+                productId,
+                {
+                  $inc: {
+                    stockQuantity: -decrementAmount,
+                    soldPackets: quantity
+                  }
+                },
+                { new: true, runValidators: true }
+              );
+
+              return { success: true, product: updatedProduct };
+            } catch (error) {
+              console.error(`Error updating product stock: ${error.message}`);
+              throw error;
             }
+          };
 
-            const decrementAmount = quantity * product.packetQuantity;
-
-            const updatedProduct = await Product.findByIdAndUpdate(
-              productId,
-              {
-                $inc: {
-                  stockQuantity: -decrementAmount,
-                  soldPackets: quantity
-                }
-              },
-              { new: true, runValidators: true }
-            );
-
-            return { success: true, product: updatedProduct };
-          } catch (error) {
-            console.error(`Error updating product stock: ${error.message}`);
-            throw error;
-          }
-        };
-
-        updateProductStock(item.productId, item.quantity);
+          await updateProductStock(item.productId, item.quantity);
+        }
 
         if (cartProductIndex > -1) {
           cart.products[cartProductIndex].quantity = item.quantity;
@@ -129,7 +135,6 @@ export const cartRepository = {
         }
       }
 
-      // Prepare the purchasedHistory object
       const purchasedOrder = {
         order: data.products.map((item) => ({
           productId: item.productId,
@@ -139,7 +144,6 @@ export const cartRepository = {
         checkoutAmt: data.totalAmt
       };
 
-      // Add the new order to purchasedHistory and clear cart products
       cart.purchasedHistory.push(purchasedOrder);
       cart.products = [];
 

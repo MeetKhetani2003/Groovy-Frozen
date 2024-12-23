@@ -143,7 +143,7 @@ export const resetPassword = async ({ token, newPassword }) => {
 
 export const getAllUsersService = async () => {
   try {
-    const users = await userRepository.getAll();
+    const users = await User.find().populate('cart');
     return users;
   } catch (error) {
     throw new ValidationError(error.message);
