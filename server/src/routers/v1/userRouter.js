@@ -26,7 +26,7 @@ app.get(
   (req, res) => {
     const token = generateToken(req.user);
     res.redirect(
-      `https://groovy-frozen-self.vercel.app/google/callback?token=${token}&user=${req.user}`
+      `https://groovy-frozen-self.vercel.app/facebook/callback?token=${token}&user=${req.user}`
     );
   }
 );
