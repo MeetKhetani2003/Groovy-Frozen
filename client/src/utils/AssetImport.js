@@ -1,6 +1,7 @@
 import admin from '../assets/imgs/admin.png';
 import bgimg from '../assets/imgs/bg.jpg';
 import cocktail from '../assets/imgs/cocktail.png';
+import contact from '../assets/imgs/contact.png';
 import food1 from '../assets/imgs/food1.png';
 import foodSignup from '../assets/imgs/foodSignup.jpg';
 import footer from '../assets/imgs/footer.jpg';
@@ -19,4 +20,5 @@ export const assets = {
   footer: footer,
   foodSignup: foodSignup,
   admin: admin,
+  contact: contact,
 };
