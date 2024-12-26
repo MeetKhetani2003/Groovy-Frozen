@@ -1,8 +1,4 @@
-import { debounce } from 'lodash'; // For debouncing search input
-import { SearchIcon } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
-
-import MenuProductcard from '@/components/molicuels/MenuProductcard';
+/* eslint-disable simple-import-sort/imports */
 import {
   Pagination,
   PaginationContent,
@@ -11,8 +7,13 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
+import { debounce } from 'lodash'; // For debouncing search input
+import { SearchIcon } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+
 import { useCart } from '@/hooks/cartHook';
 import { useProductStore } from '@/zustand/apis/ProductStore';
+import MenuProductcard from '@/components/molicuels/MenuProductcard';
 
 const Menu = () => {
   const { products, setProducts, totalProducts, getPaginatedProducts } =
